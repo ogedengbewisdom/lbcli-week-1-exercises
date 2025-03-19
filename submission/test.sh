@@ -23,11 +23,7 @@ echo "Create a wallet named 'btrustwallet' to track your Bitcoin exploration"
 # STUDENT TASK: Use bitcoin-cli to create a wallet named "btrustwallet"
 # WRITE YOUR SOLUTION BELOW:
 {
-  "name": "btrustwallet",
-  "warnings": [
-    "-fallbackfee is set very high! This is the transaction fee you may pay when fee estimates are not available.",
-    "-maxtxfee is set very high! Fees this large could be paid on a single transaction."
-  ]
+  "name": "btrustwallet"
 }
 
 # Create a second wallet that will hold the treasure
