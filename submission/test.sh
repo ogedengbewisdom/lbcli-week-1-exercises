@@ -171,19 +171,16 @@ NEW_TAPROOT_ADDR=$(trim "$NEW_TAPROOT_ADDR")
 ADDR_INFO=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getaddressinfo "$NEW_TAPROOT_ADDR")
 check_cmd "Getting address info"
 
-
-DESCRIPTOR=$(echo "$ADDR_INFO" | jq -r '.desc')
-check_cmd "Extracting descriptor"
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-INTERNAL_KEY=$(echo "$DESCRIPTOR" | grep -oE 'tr\([^)]+\)' | grep -oE '[a-f0-9]{64}')
+INTERNAL_KEY=$(echo "$ADDR_INFO" | jq -r '.desc' grep -oP '[[^]]+]\K[^#)]+')
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: $INTERNAL_KEY"
-SIMPLE_DESCRIPTOR="tr($INTERNAL_KEY)"
+SIMPLE_DESCRIPTOR=tr($INTERNAL_KEY)
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
