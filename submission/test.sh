@@ -168,7 +168,7 @@ NEW_TAPROOT_ADDR=$(trim "$NEW_TAPROOT_ADDR")
 
 # STUDENT TASK: Get the address info to extract the internal key
 # WRITE YOUR SOLUTION BELOW:
-ADDR_INFO=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getaddressinfo "$NEW_TAPROOT_ADDR")
+ADDR_INFO=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getaddressinfo "$NEW_TAPROOT_ADDR" | jq -r '.desc' | grep -oP '(?<=\])[^#]+' | sed 's/)$//')
 check_cmd "Getting address info"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
@@ -178,7 +178,6 @@ check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
 
 # STUDENT TASK: Create a proper descriptor with just the key
-
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: $INTERNAL_KEY"
 SIMPLE_DESCRIPTOR=tr($INTERNAL_KEY)
