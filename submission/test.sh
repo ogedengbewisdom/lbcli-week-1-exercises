@@ -141,7 +141,7 @@ echo "For CI testing, we'll verify the correct message directly:"
 
 # STUDENT TASK: Verify the message
 # WRITE YOUR SOLUTION BELOW:
-VERIFY_RESULT=$(bitcoin-cli -regtest -rpc-wallet=btrustwallet verifymessage $LEGACY_ADDR "$SIGNATURE" "$SECRET_MESSAGE")
+VERIFY_RESULT=$(bitcoin-cli -regtest verifymessage $LEGACY_ADDR "$SIGNATURE" "$SECRET_MESSAGE")
 check_cmd "Message verification"
 echo "Message verification result: $VERIFY_RESULT"
 
